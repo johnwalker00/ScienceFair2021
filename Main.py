@@ -25,12 +25,12 @@ def handle_click():
     status_lbl.config(text='Working...')
 
     #Run our algs
-    last_common_result = test_commons(password_ent.get())
-    last_dict_result = test_words(password_ent.get())
+    last_common_result = test_file(password_ent.get(), 'commonwords.txt')
+    last_dict_result = test_file(password_ent.get(), 'dictionary.txt')
 
     #Display results
     status_lbl.config(text='Please enter a password and timeout value')
-    results_lbl.config(text=f'Common Password Alg {last_common_result}\nDictionary Search Alg {last_dict_result}\nRandom Alg {last_random_result}')
+    results_lbl.config(text=f'Common Password Search {last_common_result}\nDictionary Search {last_dict_result}\nRandom Alg {last_random_result}')
     
     #Enable input
     password_ent.config(state=tk.NORMAL)
@@ -43,7 +43,7 @@ window.resizable(False, False)
 window.title('Password Guesser')
 
 #Results label
-results_lbl = tk.Label(master=window, height=5, text=f'Common Password Alg {last_common_result}\nDictionary Search Alg {last_dict_result}\nRandom Alg {last_random_result}', justify=tk.LEFT)
+results_lbl = tk.Label(master=window, height=5, text=f'Common Password Search {last_common_result}\nDictionary Search {last_dict_result}\nRandom Alg {last_random_result}', justify=tk.LEFT)
 results_lbl.grid(row=0, column=1, pady=10)
 
 #Password prompt
