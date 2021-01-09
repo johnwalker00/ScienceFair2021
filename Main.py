@@ -4,8 +4,13 @@ import tkinter as tk
 last_common_result = ''
 last_random_result = ''
 
+
+
 def handle_click():
     if password_ent.get() == '':
+        return
+    if timeout_ent.get() == '' or int(timeout_ent.get()) == None:
+        empty_lbl.config(text='Please enter a valid timeout value')
         return
 
     password_ent.config(state=tk.DISABLED)
@@ -23,15 +28,24 @@ window.resizable(False, False)
 window.title('Password Guesser')
 
 results_lbl = tk.Label(master=window, height=5, text='', justify=tk.LEFT)
-results_lbl.grid(row=0)
+results_lbl.grid(row=0, column=1)
 
-password_ent = tk.Entry(master=window)
-password_ent.grid(row=1, column=0, padx=20, pady=10)
+password_lbl = tk.Label(master=window, text='Password:')
+password_lbl.grid(row=1, column=0)
 
-timeout_ent = tk.Entry(master=window)
-timeout_ent.grid(row=2, column=0, padx=20, pady=10)
+password_ent = tk.Entry(master=window, width=50)
+password_ent.grid(row=1, column=1)
+
+timeout_lbl = tk.Label(master=window, text='Timeout (s): ')
+timeout_lbl.grid(row=2, column=0)
+
+timeout_ent = tk.Entry(master=window, width=50)
+timeout_ent.grid(row=2, column=1)
 
 btn = tk.Button(master=window, relief=tk.RAISED, text='Start Guessing', command=handle_click)
-btn.grid(row=1, column=1, padx=20, pady=20)
+btn.grid(row=1, column=2, padx=20)
+
+empty_lbl = tk.Label(master=window, text='Please enter a password and timeout value', width=50)
+empty_lbl.grid(row=3, column=1, pady=10)
 
 window.mainloop()
