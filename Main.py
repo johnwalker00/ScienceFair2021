@@ -1,21 +1,17 @@
 from Gorithms import *
-from GUIHandler import *
+import tkinter as tk
 
-init()
+window = tk.Tk()
+window.resizable(False, False)
+window.title('Title')
 
-closed = False
-while not closed:
-    user_input = input('Please enter a command: ')
+txt_lbl = tk.Label(master=window, height=5, text='Common Password Alg: \nRandom Alg:', justify=tk.LEFT)
+txt_lbl.grid(row=0, column=0)
 
-    if user_input in ['close', 'exit', 'end', 'stop']:
-        closed = True
+txt_ent = tk.Entry(master=window)
+txt_ent.grid(row=1, column=0, padx=20, pady=20)
 
-    if user_input.startswith('test '):
-        args = user_input.split(' ')
+btn = tk.Button(master=window, relief=tk.RAISED, text='Start Guessing')
+btn.grid(row=1, column=1, padx=20, pady=20)
 
-        if (len(args) < 2):
-            continue
-        while (len(args) > 2):
-            args.__delitem__(2)
-        
-        print(test_commons(args[1]))
+window.mainloop()
