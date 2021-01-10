@@ -2,9 +2,10 @@ from Gorithms import *
 import tkinter as tk
 
 #Init vars for changing labels
-last_common_result = ''
-last_dict_result = ''
-last_random_result = ''
+common_result = ''
+dict_result = ''
+dict_num_result = ''
+random_result = ''
 
 #Handle button click
 def handle_click():
@@ -22,15 +23,16 @@ def handle_click():
     btn.config(state=tk.DISABLED)
 
     #Flavor
-    status_lbl.config(text='Working...')
+    status_lbl.config(text='Calculating...')
 
     #Run our algs
-    last_common_result = test_file(password_ent.get(), 'commonwords.txt')
-    last_dict_result = test_file(password_ent.get(), 'dictionary.txt')
+    common_result = test_file(password_ent.get(), 'commonwords.txt')
+    dict_result = test_file(password_ent.get(), 'dictionary.txt')
+    dict_num_result = test_word_num(password_ent.get(), 'dictionary.txt', int(timeout_ent.get()))
 
     #Display results
     status_lbl.config(text='Please enter a password and timeout value')
-    results_lbl.config(text=f'Common Password Search {last_common_result}\nDictionary Search {last_dict_result}\nRandom Alg {last_random_result}')
+    results_lbl.config(text=f'Common Password Search {common_result}\nDictionary Search {dict_result}\nDictionary and Number Search {dict_num_result}\nRandom Alg {random_result}')
     
     #Enable input
     password_ent.config(state=tk.NORMAL)
@@ -43,7 +45,7 @@ window.resizable(False, False)
 window.title('Password Guesser')
 
 #Results label
-results_lbl = tk.Label(master=window, height=5, text=f'Common Password Search {last_common_result}\nDictionary Search {last_dict_result}\nRandom Alg {last_random_result}', justify=tk.LEFT)
+results_lbl = tk.Label(master=window, height=5, text=f'Common Password Search {common_result}\nDictionary Search {dict_result}\nDictionary and Number Search {dict_num_result}\nRandom Alg {random_result}', justify=tk.LEFT)
 results_lbl.grid(row=0, column=1, pady=10)
 
 #Password prompt
