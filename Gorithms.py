@@ -1,4 +1,8 @@
 from datetime import datetime
+import random
+
+special_chars = '`~!@#$%^&*()-=_+[]\\{}|;\':",./<>?'
+chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz' + special_chars
 
 #Helpful, gets current time in milliseconds
 def now_mseconds():
@@ -55,7 +59,7 @@ def test_word_num(password: str, input_file: str, timeout: int):
     success = False
     current_guess = 0
     count = 0
-    while True:
+    while not success:
         #Ensure we haven't reached the last word
         if current_guess < len(words):
             #See if we guessed correctly
@@ -67,6 +71,7 @@ def test_word_num(password: str, input_file: str, timeout: int):
                 success = True
                 break
             else:
+                count += 1
                 #Now we try appending numbers
                 for i in range(9):
                     if words[current_guess].replace('\n', '') + str(i) == password:
@@ -77,12 +82,23 @@ def test_word_num(password: str, input_file: str, timeout: int):
                         break
                     else:
                         count += 1
+                        #And special chars
+                        for j in range(len(special_chars)):
+                            if words[current_guess].replace('\n', '') + str(i) + special_chars[j] == password:
+                                success = True
+                                break
+                            elif words[current_guess].replace('\n', '').capitalize() + str(i) + special_chars[j] == password:
+                                success = True
+                                break
+                        if now_mseconds() - start_time >= timeout * 1000:
+                            break
+
+                if now_mseconds() - start_time >= timeout * 1000:
+                    break
         #Password is not in list
         else:
-            break
+            current_guess = -1
         current_guess += 1
-        if now_mseconds() - start_time >= timeout * 1000:
-            break
 
     if success:
         #Print victory message plus time it took
@@ -93,8 +109,10 @@ def test_word_num(password: str, input_file: str, timeout: int):
         end_time = now_mseconds()
         return f'could not find {password} after {count} loops, {end_time - start_time} milliseconds'
 
-
-
 #Test randomly
 def random_test(password: str, timeout: int):
-    pass
+    guess = ['']
+
+    success = False
+    for i in range(len(char)):
+        

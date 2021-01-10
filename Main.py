@@ -57,7 +57,7 @@ password_ent = tk.Entry(master=window, width=50)
 password_ent.grid(row=1, column=1, pady=10)
 
 #Timeout prompt
-timeout_lbl = tk.Label(master=window, text='Timeout (s): ', justify=tk.LEFT)
+timeout_lbl = tk.Label(master=window, text='Timeout (seconds): ', justify=tk.LEFT)
 timeout_lbl.grid(row=2, column=0, pady=10)
 
 #Timeout entry box
