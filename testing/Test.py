@@ -14,7 +14,7 @@ def has_low(string: str):
 
 def write_result(password, alg_common_pwd, alg_common_pwd_time, alg_dictionary, alg_dictionary_time, alg_dictionary_num, alg_dictionary_num_time, alg_random, alg_random_time, length, numbers, special, capitals, lowercase) :
     with open('testing/out.csv', 'a') as csv_file:
-        csv_file.write(password + ',' + alg_common_pwd + ',' + alg_common_pwd_time + ',' + alg_dictionary + ',' + alg_dictionary_time + ',' + alg_dictionary_num + ',' + alg_dictionary_num_time + ',' + alg_random + ',' + alg_random + ',' + str(length) + ',' + str(numbers) + ',' + str(special) + ',' + str(capitals) + ',' + str(lowercase))
+        csv_file.write(password + ',' + alg_common_pwd + ',' + alg_common_pwd_time + ',' + alg_dictionary + ',' + alg_dictionary_time + ',' + alg_dictionary_num + ',' + alg_dictionary_num_time + ',' + alg_random + ',' + alg_random_time + ',' + str(length) + ',' + str(numbers) + ',' + str(special) + ',' + str(capitals) + ',' + str(lowercase))
         
         csv_file.write('\n')
 
@@ -26,4 +26,8 @@ def call_algs(password: str, timeout: int):
 
     write_result(password, common_result[0], common_result[1], dict_result[0], dict_result[1], dict_num_result[0], dict_num_result[1], random_result[0], random_result[1], len(password), has_num(password), has_sp_char(password), has_cap(password), has_low(password))
 
-call_algs('a', 15)
+with open('testing/testpasswords.txt') as password_file:
+    for i in range(100):
+        word = password_file.readline().replace('\n', '')
+        call_algs(word, 10)
+        print(str(i) + ' ' + word)
