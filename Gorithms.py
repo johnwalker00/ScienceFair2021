@@ -1,10 +1,12 @@
 from datetime import datetime, time
 import itertools
+from typing import Iterable, List
 
-special_chars = '`~!@#$%^&*()-=_+[]\\{}|;\':",./<>?'
+special_chars = '`~!@#$%^&*()-=_+[]\\{}|;\':",./<>? '
 num_chars = '1234567890'
-chars = ' AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz' + num_chars + special_chars
-
+letter_chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
+chars = letter_chars + num_chars + special_chars
+print(len(special_chars))
 #Helpful, gets current time in milliseconds
 def now_mseconds():
     return datetime.now().hour * 360 * 1000 + datetime.now().minute * 60 * 1000 + datetime.now().second * 1000 + round(datetime.now().microsecond / 1000)
@@ -69,22 +71,34 @@ def test_word_num(password: str, input_file: str, timeout: int):
     while not success:
         #Ensure we haven't reached the last word
         if current_guess < len(words):
+            #Vars so we don't have to keep appending to str
+            current_word = words[current_guess].replace('\n', '')
+            current_word_cap = current_word.capitalize()
+            
             #See if we guessed correctly
-            if password in [words[current_guess].replace('\n', ''), words[current_guess].replace('\n', '').capitalize()]:
+            if password in [current_word, current_word_cap]:
                 success = True
                 break
             else:
                 count += 1
                 #Now we try appending numbers
-                for i in range(9):
-                    if password in [words[current_guess].replace('\n', '') + str(i), words[current_guess].replace('\n', '').capitalize() + str(i)]:
+                for i in range(10):
+                    #Vars so we don't have to keep appending to str
+                    current_word_num = current_word + str(i)
+                    current_word_cap_num = current_word_cap + str(i)
+
+                    if password in [current_word_num, current_word_cap_num]:
                         success = True
                         break
                     else:
                         count += 1
                         #And special chars
                         for j in range(len(special_chars)):
-                            if password in [words[current_guess].replace('\n', '') + str(i) + special_chars[j], words[current_guess].replace('\n', '').capitalize() + str(i) + special_chars[j]]:
+                            #Vars so we don't have to keep appending to str
+                            current_word_num_char = current_word_num + special_chars[i]
+                            current_word_cap_num_char = current_word_cap + special_chars[i]
+
+                            if password in [current_word_num_char, current_word_cap_num_char]:
                                 success = True
                                 break
                         if now_mseconds() - start_time >= timeout * 1000:
@@ -92,9 +106,6 @@ def test_word_num(password: str, input_file: str, timeout: int):
 
                 if now_mseconds() - start_time >= timeout * 1000:
                     break
-        #Password is not in list
-        else:
-            current_guess = -1
         current_guess += 1
 
     if success:
