@@ -10,9 +10,9 @@ def now_mseconds():
     return datetime.now().hour * 360 * 1000 + datetime.now().minute * 60 * 1000 + datetime.now().second * 1000 + round(datetime.now().microsecond / 1000)
 
 #Got from Stack Overflow
-def iter_all_strings():
+def iter_all_strings(iter_string: str):
     for size in itertools.count(1):
-        for s in itertools.product(chars, repeat=size):
+        for s in itertools.product(iter_string, repeat=size):
             yield ''.join(s)
 
 #Looks for a word in a file
@@ -113,7 +113,7 @@ def random_test(password: str, timeout: int):
     
     success = False
     count = 0
-    for guess in iter_all_strings():
+    for guess in iter_all_strings(chars):
         if guess == password:
             success = True
             break

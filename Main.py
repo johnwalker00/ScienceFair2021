@@ -37,11 +37,11 @@ def handle_click():
 
     #Run our algs
     if run_cps.get():
-        common_result = test_file(password_ent.get(), 'commonwords.txt')
+        common_result = test_file(password_ent.get(), 'data/commonwords.txt')
     if run_ds.get():
-        dict_result = test_file(password_ent.get(), 'dictionary.txt')
+        dict_result = test_file(password_ent.get(), 'data/dictionary.txt')
     if run_dns.get():
-        dict_num_result = test_word_num(password_ent.get(), 'dictionary.txt', int(timeout_ent.get()))
+        dict_num_result = test_word_num(password_ent.get(), 'data/dictionary.txt', int(timeout_ent.get()))
     if run_rnd.get():
         random_result = random_test(password_ent.get(), int(timeout_ent.get()))
     
