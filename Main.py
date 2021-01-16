@@ -101,6 +101,9 @@ dns_results_lbl.grid(row=3, column=1, sticky='w')
 rnd_results_lbl = tk.Label(master=window, height=1, text=f'Random Search', justify=tk.LEFT)
 rnd_results_lbl.grid(row=4, column=1, sticky='w')
 
+#Loop controls
+loop_cbx = tk.Checkbutton(master=window)
+
 #Password prompt
 password_lbl = tk.Label(master=window, text='Password: ', justify=tk.LEFT)
 password_lbl.grid(row=5, column=0, pady=10, sticky='e')

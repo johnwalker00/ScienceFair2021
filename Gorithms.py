@@ -1,6 +1,5 @@
-from datetime import datetime, time
+from datetime import datetime
 import itertools
-from typing import Iterable, List
 
 special_chars = '`~!@#$%^&*()-=_+[]\\{}|;\':",./<>? '
 num_chars = '1234567890'
@@ -101,6 +100,10 @@ def test_word_num(password: str, input_file: str, timeout: int):
                             if password in [current_word_num_char, current_word_cap_num_char]:
                                 success = True
                                 break
+
+                            if now_mseconds() - start_time >= timeout * 1000:
+                                break
+
                         if now_mseconds() - start_time >= timeout * 1000:
                             break
 

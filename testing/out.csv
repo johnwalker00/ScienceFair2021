@@ -1,0 +1,2 @@
+"password", alg-common-pwd, time, alg-dictionary, time, alg-dictionary-num, time, alg-random, time, length, numbers, special, capitals, lowercase
+a,True,0.014,True,0.048,True,0.042,True,True,1,False,False,False,True
